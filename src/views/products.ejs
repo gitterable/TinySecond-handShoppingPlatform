@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<div class="page-head">
+  <h2>상품 목록</h2>
+  <a class="btn" href="/products/new">+ 상품 등록</a>
+</div>
+
+<form action="/products" method="get" class="search-form">
+  <input type="text" name="q" value="<%= q %>" placeholder="상품명 검색..." maxlength="100" />
+  <button type="submit" class="btn">검색</button>
+</form>
+
+<% if (products.length === 0) { %>
+  <p class="muted">표시할 상품이 없습니다.</p>
+<% } else { %>
+  <ul class="product-list">
+    <% products.forEach(function(p) { %>
+      <li>
+        <a href="/products/<%= p.id %>"><%= p.name %></a>
+        <span class="price"><%= p.price.toLocaleString() %>원</span>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

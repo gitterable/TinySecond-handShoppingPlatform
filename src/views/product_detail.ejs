@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<div class="card product-detail">
+  <% if (product.status === 'blocked') { %>
+    <p class="badge badge-danger">차단된 상품</p>
+  <% } else if (product.status === 'sold') { %>
+    <p class="badge badge-danger">판매완료</p>
+  <% } %>
+  <h2><%= product.name %></h2>
+  <% if (product.image) { %>
+    <img class="product-img" src="<%= product.image %>" alt="상품 이미지" />
+  <% } %>
+  <p class="price-lg"><%= product.price.toLocaleString() %> 원</p>
+  <p class="desc"><%= product.description || '(설명 없음)' %></p>
+  <p class="muted">판매자: <a href="/users/<%= product.seller_id %>"><%= product.seller_name %></a></p>
+
+  <div class="actions">
+    <% if (currentUser && currentUser.id !== product.seller_id) { %>
+      <% if (product.status === 'active') { %>
+        <form action="/products/<%= product.id %>/buy" method="post" class="inline-form"
+              data-confirm="<%= product.price.toLocaleString() %>원에 구매하시겠습니까?">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="btn">구매하기</button>
+        </form>
+      <% } %>
+      <a class="btn btn-outline" href="/chat/<%= product.seller_id %>">판매자와 채팅</a>
+      <a class="btn btn-outline" href="/report?type=product&id=<%= product.id %>">상품 신고</a>
+    <% } %>
+    <% if (isOwner || (currentUser && currentUser.is_admin)) { %>
+      <form action="/products/<%= product.id %>/delete" method="post" class="inline-form"
+            data-confirm="정말 삭제하시겠습니까?">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit" class="btn btn-danger">삭제</button>
+      </form>
+    <% } %>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

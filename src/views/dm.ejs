@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+
+<h2><%= other.username %>님과의 1:1 채팅</h2>
+<div class="card chat-box" data-other-id="<%= other.id %>">
+  <ul id="messages" class="messages"></ul>
+  <form id="dm-form" class="chat-form" autocomplete="off">
+    <input id="dm-input" type="text" maxlength="500" placeholder="메시지를 입력하세요..." required />
+    <button type="submit" class="btn">전송</button>
+  </form>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/dm.js"></script>
+
+<%- include('partials/footer') %>

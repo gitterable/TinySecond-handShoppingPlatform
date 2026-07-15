@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<div class="card auth-card">
+  <h2>회원가입</h2>
+  <form action="/register" method="post" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>아이디
+      <input type="text" name="username" value="<%= values.username || '' %>" required
+             minlength="3" maxlength="20" pattern="[a-zA-Z0-9_]+" />
+    </label>
+    <small>영문/숫자/밑줄 3~20자</small>
+    <label>비밀번호
+      <input type="password" name="password" required minlength="8" maxlength="72" />
+    </label>
+    <small>영문+숫자 포함 8자 이상</small>
+    <label>비밀번호 확인
+      <input type="password" name="passwordConfirm" required minlength="8" maxlength="72" />
+    </label>
+    <button type="submit" class="btn">가입하기</button>
+  </form>
+  <p class="muted">이미 계정이 있으신가요? <a href="/login">로그인</a></p>
+</div>
+
+<%- include('partials/footer') %>

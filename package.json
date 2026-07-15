@@ -1,0 +1,28 @@
+{
+  "name": "tiny-secondhand-shopping-platform",
+  "version": "1.0.0",
+  "description": "Tiny Second-hand Shopping Platform - WHS Secure Coding Assignment",
+  "main": "src/app.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "init-db": "node src/db.js"
+  },
+  "keywords": ["secure-coding", "second-hand", "marketplace"],
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^11.3.0",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "helmet": "^8.0.0",
+    "multer": "^2.0.1",
+    "socket.io": "^4.8.0",
+    "validator": "^13.12.0"
+  }
+}

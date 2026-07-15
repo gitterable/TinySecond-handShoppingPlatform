@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<div class="card">
+  <h2><%= profile.username %>님의 프로필</h2>
+  <% if (profile.status === 'suspended') { %>
+    <p class="badge badge-danger">휴면(정지)된 계정</p>
+  <% } %>
+  <p><strong>소개글:</strong></p>
+  <p class="bio"><%= profile.bio || '(소개글이 없습니다)' %></p>
+
+  <% if (currentUser && currentUser.id !== profile.id) { %>
+    <div class="actions">
+      <a class="btn" href="/chat/<%= profile.id %>">1:1 채팅</a>
+      <a class="btn btn-outline" href="/report?type=user&id=<%= profile.id %>">신고하기</a>
+    </div>
+  <% } %>
+</div>
+
+<div class="card">
+  <h3><%= profile.username %>님의 상품</h3>
+  <% if (products.length === 0) { %>
+    <p class="muted">등록한 상품이 없습니다.</p>
+  <% } else { %>
+    <ul class="product-list">
+      <% products.forEach(function(p) { %>
+        <li><a href="/products/<%= p.id %>"><%= p.name %></a> — <%= p.price.toLocaleString() %>원</li>
+      <% }); %>
+    </ul>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= typeof title !== 'undefined' ? title : 'Tiny Shop' %> · Tiny 중고거래</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <% if (currentUser && currentUser.is_admin) { %>
+    <header class="topbar topbar-admin">
+      <div class="brand"><a href="/admin">🛡️ 관리자 대시보드</a></div>
+      <nav class="nav">
+        <a href="/admin">대시보드</a>
+        <a href="/admin#chat">전체채팅</a>
+        <form action="/logout" method="post" class="inline-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="link-btn">로그아웃(<%= currentUser.username %>)</button>
+        </form>
+      </nav>
+    </header>
+  <% } else { %>
+    <header class="topbar">
+      <div class="brand"><a href="/">🛍️ Tiny 중고거래</a></div>
+      <nav class="nav">
+        <a href="/products">상품</a>
+        <a href="/chat">전체채팅</a>
+        <% if (currentUser) { %>
+          <a href="/products/new">상품등록</a>
+          <a href="/my/products">내상품</a>
+          <a href="/transfer">송금</a>
+          <a href="/inquiry">문의하기</a>
+          <a href="/mypage">마이페이지</a>
+          <form action="/logout" method="post" class="inline-form">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button type="submit" class="link-btn">로그아웃(<%= currentUser.username %>)</button>
+          </form>
+        <% } else { %>
+          <a href="/login">로그인</a>
+          <a href="/register">회원가입</a>
+        <% } %>
+      </nav>
+    </header>
+  <% } %>
+
+  <main class="container">
+    <% if (typeof flash !== 'undefined' && flash) { %>
+      <div class="flash flash-<%= flash.type %>"><%= flash.message %></div>
+    <% } %>
+    <% if (typeof errors !== 'undefined' && errors && errors.length) { %>
+      <div class="flash flash-error">
+        <ul>
+          <% errors.forEach(function(e) { %><li><%= e %></li><% }); %>
+        </ul>
+      </div>
+    <% } %>

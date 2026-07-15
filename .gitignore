@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets
+.env
+
+# Database (runtime data)
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# Uploaded files
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db

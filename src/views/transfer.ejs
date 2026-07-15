@@ -1,0 +1,41 @@
+<%- include('partials/header') %>
+
+<h2>송금</h2>
+<div class="card">
+  <p><strong>보유 잔액:</strong> <%= balance.toLocaleString() %> 원</p>
+  <p class="muted">잔액 충전은 관리자에게 문의해 주세요.</p>
+  <h3>송금</h3>
+  <form action="/transfer" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>받는 사람 (아이디)
+      <input type="text" name="receiver" required maxlength="20" />
+    </label>
+    <label>금액 (원)
+      <input type="number" name="amount" required min="1" step="1" />
+    </label>
+    <button type="submit" class="btn">송금하기</button>
+  </form>
+</div>
+
+<div class="card">
+  <h3>거래 내역</h3>
+  <% if (history.length === 0) { %>
+    <p class="muted">거래 내역이 없습니다.</p>
+  <% } else { %>
+    <table class="table">
+      <thead><tr><th>일시</th><th>보내는이</th><th>받는이</th><th>금액</th></tr></thead>
+      <tbody>
+        <% history.forEach(function(t) { %>
+          <tr>
+            <td><%= t.created_at %></td>
+            <td><%= t.sender_name %></td>
+            <td><%= t.receiver_name %></td>
+            <td><%= t.amount.toLocaleString() %>원</td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

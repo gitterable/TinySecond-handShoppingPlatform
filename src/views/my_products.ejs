@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<h2>내 상품 관리</h2>
+<% if (products.length === 0) { %>
+  <p class="muted">등록한 상품이 없습니다. <a href="/products/new">상품 등록하기</a></p>
+<% } else { %>
+  <table class="table">
+    <thead><tr><th>상품명</th><th>가격</th><th>상태</th><th>관리</th></tr></thead>
+    <tbody>
+      <% products.forEach(function(p) { %>
+        <tr>
+          <td><a href="/products/<%= p.id %>"><%= p.name %></a></td>
+          <td><%= p.price.toLocaleString() %>원</td>
+          <td><span class="badge badge-<%= p.status === 'active' ? 'ok' : 'danger' %>"><%= p.status %></span></td>
+          <td>
+            <form action="/products/<%= p.id %>/delete" method="post" class="inline-form"
+                  data-confirm="정말 삭제하시겠습니까?">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button type="submit" class="link-btn danger">삭제</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/footer') %>

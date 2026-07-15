@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<h2>마이페이지</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3>내 정보</h3>
+    <p><strong>아이디:</strong> <%= profile.username %></p>
+    <p><strong>보유 잔액:</strong> <%= profile.balance.toLocaleString() %> 원</p>
+    <p><a href="/users/<%= profile.id %>">공개 프로필 보기</a></p>
+  </div>
+
+  <div class="card">
+    <h3>소개글 수정</h3>
+    <form action="/mypage/bio" method="post">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <textarea name="bio" rows="4" maxlength="500" placeholder="자기소개를 입력하세요"><%= profile.bio %></textarea>
+      <button type="submit" class="btn">소개글 저장</button>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <h3>비밀번호 변경</h3>
+  <form action="/mypage/password" method="post" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>현재 비밀번호<input type="password" name="currentPassword" required /></label>
+    <label>새 비밀번호<input type="password" name="newPassword" required minlength="8" maxlength="72" /></label>
+    <label>새 비밀번호 확인<input type="password" name="newPasswordConfirm" required minlength="8" maxlength="72" /></label>
+    <button type="submit" class="btn">비밀번호 변경</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

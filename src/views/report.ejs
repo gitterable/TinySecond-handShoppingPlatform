@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<div class="card">
+  <h2>신고하기</h2>
+  <% if (!values.targetId) { %>
+    <p class="flash flash-error">신고 대상이 지정되지 않았습니다. 상품 상세 페이지나 사용자 프로필에서 "신고" 버튼을 통해 접근해 주세요.</p>
+  <% } else { %>
+    <form action="/report" method="post">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <input type="hidden" name="targetType" value="<%= values.targetType %>" />
+      <input type="hidden" name="targetId" value="<%= values.targetId %>" />
+      <label>신고 대상
+        <input type="text" value="<%= values.targetLabel || (values.targetType + ' #' + values.targetId) %>" readonly />
+      </label>
+      <label>신고 사유
+        <textarea name="reason" rows="4" maxlength="500" required placeholder="신고 사유를 구체적으로 작성하세요"></textarea>
+      </label>
+      <button type="submit" class="btn btn-danger">신고 제출</button>
+    </form>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>
