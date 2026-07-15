@@ -1,10 +1,3 @@
-# Tiny Second-hand Shopping Platform 개발 보고서
-
-- **과목**: WHS(화이트햇 스쿨) Secure Coding
-- **과제**: 시큐어 코딩을 적용한 중고거래 플랫폼 개발
-- **제출자**: (이름 / XX반 / 전화번호 뒷자리)
-- **GitHub 저장소**: https://github.com/<본인아이디>/<저장소이름>  ← *실제 public 저장소 링크로 교체*
-- **작성일**: 2026-07-XX
 
 ---
 
@@ -302,7 +295,7 @@ data/app.db                    # SQLite (git 제외)
 | admin → tester1 7000원 충전 | 잔액 +7000 | ✅ |
 | 유저 문의 → admin 답변 | 유저 화면 "답변완료" | ✅ |
 
-*(PDF 제출 시 관리자 대시보드, 구매 완료, 신고 차단 화면 스크린샷 2~3장 첨부 권장)*
+
 
 ---
 
@@ -319,7 +312,6 @@ data/app.db                    # SQLite (git 제외)
 | 5 | npm audit high (tar, multer 1.x) | bcrypt 6.x, multer 2.x 업그레이드 | 유지보수 |
 | 6 | .env UTF-16 파싱 실패 | UTF-8 저장, README 주의사항 | 유지보수 |
 
-**향후 개선 아이디어**: 관리자 충전 내역 별도 로그, 상품 카테고리, 이메일 알림, 2FA, HTTPS 배포 등.
 
 ---
 
@@ -328,7 +320,7 @@ data/app.db                    # SQLite (git 제외)
 ### 8.1 GitHub
 - 저장소는 **public**으로 공개
 - `.gitignore`로 `.env`, `node_modules`, `data/*.db`, `public/uploads/*` 제외 (비밀·런타임 데이터 미포함)
-- **저장소 URL**: https://github.com/<본인아이디>/<저장소이름>
+- **저장소 URL**: https://github.com/gitterable/TinySecond-handShoppingPlatform.git
 
 ### 8.2 환경 설정 및 실행 (요약)
 
@@ -360,10 +352,3 @@ npm start
 
 ---
 
-## 부록: PDF 제출 체크리스트
-
-- [ ] 표지: 이름, 반, GitHub 링크, 작성일 입력
-- [ ] GitHub public 업로드 완료, README.md 실행 방법 확인
-- [ ] 본 보고서 PDF 변환
-- [ ] 파일명: `[WHS][secure-coding][XX반]이름(1234).pdf` (공백 없음)
-- [ ] LMS 제출 (마감: 2026-07-23 23:59:59)
